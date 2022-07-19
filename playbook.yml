@@ -1,0 +1,9 @@
+  - name: Playbook
+    hosts: all
+    become: yes
+    tasks:
+      - name: Get hostname
+        shell: echo $HOSTNAME
+        register: result
+      - debug:
+        var: result
