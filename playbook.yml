@@ -11,6 +11,7 @@
           instance_ids: "{{ aws_instance_id }}"
           region: us-east-1
           state: running
+          wait: True
         register: result
       - debug:
           var: result
