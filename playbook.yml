@@ -3,7 +3,7 @@
     become: yes
     tasks:
       - name: Start the instance if not running
-        ec2_instance:
+        amazon.aws.ec2_instance:
           instance_ids: "{{ aws_instance_id }}"
           region: us-east-1
           state: running
