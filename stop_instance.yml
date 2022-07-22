@@ -1,0 +1,25 @@
+  - name: "Stop instance"
+    hosts: localhost
+    connection: local
+    gather_facts: false
+    vars:
+      ansible_connection: local
+      aws_ec2_region: "us-east-1"
+    tasks:
+      - name: Gather information about all instances in AZ ap-southeast-2a
+        amazon.aws.ec2_instance_info:
+          filters:
+            network-interface.addresses.private-ip-address: "{{ ip_address }}"
+          region: "{{ aws_ec2_region }}"
+        register: list_instances
+      - name: Stop the instance if  running
+        delegate_to: localhost
+        amazon.aws.ec2_instance:
+          instance_ids: "{{ item.instance_id }}"
+          region: "{{ aws_ec2_region }}"
+          state: stopped
+          wait: True
+        with_items: "{{ list_instances.instances }}"
+        register: result
+      - debug:
+          var: result
