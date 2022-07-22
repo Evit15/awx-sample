@@ -28,7 +28,7 @@
                       host={{ item.private_ip_address }} 
                       port=22 
                       state=started
-        with_items: "{{ result.results.instances }}"
+        with_items: "{{ list_instances.instances }}"
   - name: Playbook
     hosts: all
     become: yes
