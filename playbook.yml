@@ -24,7 +24,14 @@
   - name: Playbook
     hosts: all
     become: yes
+    gather_facts: no
     tasks:
+      - name: Wait for system to become reachable
+        ansible.builtin.wait_for_connection:
+
+      - name: Gather facts for first time
+        ansible.builtin.setup:
+
       - name: Get hostname
         shell: echo $HOSTNAME
         register: result
