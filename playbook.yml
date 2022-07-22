@@ -1,6 +1,9 @@
-  - name: Playbook
-    hosts: all
-    become: yes
+  - name: "Start instance"
+    hosts: localhost
+    connection: local
+    gather_facts: false
+    vars:
+      ansible_connection: local
     tasks:
       - name: Start the instance if not running
         delegate_to: localhost
@@ -11,3 +14,12 @@
         register: result
       - debug:
           var: result
+  - name: Playbook
+    hosts: all
+    become: yes
+    tasks:
+      - name: Get hostname
+        shell: echo $HOSTNAME
+        register: result
+      - debug:
+        var: result
