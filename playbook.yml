@@ -37,9 +37,26 @@
                       state=started
         with_items: "{{ list_instances.instances }}"
         when: item.tags.OS == 'Windows' or item.tags.os == 'Windows'
-  - name: Playbook
+  # Linux
+  # - name: Playbook
+  #   hosts: '{{ group }}'
+  #   become: yes
+  #   gather_facts: no
+  #   tasks:
+  #     - name: Wait for system to become reachable
+  #       ansible.builtin.wait_for_connection:
+
+  #     - name: Gather facts for first time
+  #       ansible.builtin.setup:
+
+  #     - name: Get hostname
+  #       shell: echo $HOSTNAME
+  #       register: result
+  #     - debug:
+  #         var: result
+# Windows          
+- name: Playbook
     hosts: '{{ group }}'
-    #become: yes
     gather_facts: no
     tasks:
       - name: Wait for system to become reachable
@@ -49,7 +66,7 @@
         ansible.builtin.setup:
 
       - name: Get hostname
-        shell: echo $HOSTNAME
+        win_command: echo %COMPUTERNAME%
         register: result
       - debug:
           var: result
