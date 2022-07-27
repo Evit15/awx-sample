@@ -39,7 +39,7 @@
         when: item.tags.OS == 'Windows' or item.tags.os == 'Windows'
   - name: Playbook
     hosts: '{{ group }}'
-    become: yes
+    #become: yes
     gather_facts: no
     tasks:
       - name: Wait for system to become reachable
