@@ -70,3 +70,10 @@
         register: result
       - debug:
           var: result
+      - name: Download Tools
+        win_get_url:
+          url: '{{ tools }}'
+          headers:
+            X-JFrog-Art-Api: "{{ api_key | default('') }}"
+            Authorization: "Bearer {{ access_token | default('') }}"
+          dest: '{{ temp_location }}\Tools.zip'
