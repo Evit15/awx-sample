@@ -66,7 +66,7 @@
         ansible.builtin.setup:
 
       - name: Get hostname
-        win_command: echo %COMPUTERNAME%
+        win_command: HOSTNAME
         register: result
       - debug:
           var: result
