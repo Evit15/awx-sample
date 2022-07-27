@@ -56,17 +56,17 @@
   #         var: result
 # Windows          
 - name: Playbook
-    hosts: '{{ group }}'
-    gather_facts: no
-    tasks:
-      - name: Wait for system to become reachable
-        ansible.builtin.wait_for_connection:
+  hosts: '{{ group }}'
+  gather_facts: no
+  tasks:
+    - name: Wait for system to become reachable
+      ansible.builtin.wait_for_connection:
 
-      - name: Gather facts for first time
-        ansible.builtin.setup:
+    - name: Gather facts for first time
+      ansible.builtin.setup:
 
-      - name: Get hostname
-        win_command: echo %COMPUTERNAME%
-        register: result
-      - debug:
-          var: result
+    - name: Get hostname
+      win_command: echo %COMPUTERNAME%
+      register: result
+    - debug:
+        var: result
