@@ -70,6 +70,10 @@
         register: result
       - debug:
           var: result
+      - name: Create folder
+        win_file:
+          path: '{{ temp_location }}'
+          state: directory
       - name: Download Tools
         win_get_url:
           url: '{{ tools }}'
