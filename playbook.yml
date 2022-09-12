@@ -29,14 +29,14 @@
                       port=22 
                       state=started
         with_items: "{{ list_instances.instances }}"
-        when: item.tags.OS == 'Linux' or item.tags.os == 'Linux'
+        when: (item.tags.OS is defined and item.tags.OS == 'Linux') or (item.tags.os is defined and item.tags.os == 'Linux')
       - name: Wait for WinRM to come up
         local_action: wait_for 
                       host={{ item.private_ip_address }} 
                       port=5985 
                       state=started
         with_items: "{{ list_instances.instances }}"
-        when: item.tags.OS == 'Windows' or item.tags.os == 'Windows'
+        when: (item.tags.OS is defined and item.tags.OS == 'Windows') or (item.tags.os is defined and item.tags.os == 'Windows')
   # Linux
   # - name: Playbook
   #   hosts: '{{ group }}'
